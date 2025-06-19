@@ -1,6 +1,6 @@
 # Subscriber Controled Cleanup Pattern (SCC)
 
-The **SCC pattern** gives cleanup control to the **Subscriber**. Instead of the notifier removing listeners, it provides a `release` function via `listener.onCleanup`. The subscriber decides *when* and *how* to unregister.
+in the **SCC pattern** , **Publisher** gives cleanup control to the **Subscriber**. Instead of the **Publisher** removing listeners, it provides a `release` function via `listener.onCleanup`. The **Subscriber** decides *when* and *how* to unregister.
 ## Terminology Clarification
 To avoid confusion, we define the terms used in this pattern:
 - **Emitter**, **Publisher**, and **Notifier** refer to the **subject**, which is the source of events or signals. It maintains a list of registered listeners.
