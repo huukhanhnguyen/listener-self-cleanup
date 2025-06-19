@@ -14,6 +14,7 @@ To avoid confusion, we define the terms used in this pattern.
 - **Observer**
 - **Receiver**
 - **Callback**
+  
 This pattern applies regardless of which terminology your framework uses.
 ## Problems with Traditional Cleanup
 
