@@ -2,9 +2,18 @@
 
 in the **SCC pattern** , **Publisher** gives cleanup control to the **Subscriber**. Instead of the **Publisher** removing listeners, it provides a `release` function via `listener.onCleanup`. The **Subscriber** decides *when* and *how* to unregister.
 ## Terminology Clarification
-To avoid confusion, we define the terms used in this pattern:
-- **Emitter**, **Publisher**, and **Notifier** refer to the **subject**, which is the source of events or signals. It maintains a list of registered listeners.
-- **Subscriber**, **Listener**, **Observer**, and **Callback** refer to the **receiving function or entity** that reacts when notified.
+To avoid confusion, we define the terms used in this pattern.
+### Subject: Source of events or signals maintains a list of registered listeners
+- **Emitter**
+- **Publisher**
+- **Announcer**
+- **Notifier**
+### Receiver reacts when notified
+- **Subscriber**
+- **Listener**
+- **Observer**
+- **Receiver**
+- **Callback**
 This pattern applies regardless of which terminology your framework uses.
 ## Problems with Traditional Cleanup
 
