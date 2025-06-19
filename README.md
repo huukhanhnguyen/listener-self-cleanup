@@ -1,6 +1,6 @@
-# Subscriber Controlled Cleanup (SCC)
+# Self-Release Event Pattern
 
-in the **SCC pattern** , **Publisher** gives cleanup control to the **Subscriber**. Instead of the **Publisher** removing listeners, it provides a `release` function via `listener.onCleanup`. The **Subscriber** decides *when* and *how* to unregister.
+in the **Self-Release pattern** , **Publisher** gives cleanup control to the **Subscriber**. Instead of the **Publisher** removing listeners, it provides a `release` function via `listener.onCleanup`. The **Subscriber** decides *when* and *how* to unregister.
 ## Terminology Clarification
 To avoid confusion, we define the terms used in this pattern.
 ### Subject: Source of events or signals maintains a list of registered listeners
@@ -36,7 +36,7 @@ This pattern applies regardless of which terminology your framework uses.
 
 ## JavaScript Example
 ### Basic Implementation
-This example demonstrates the core idea of the Subscriber Self Control Pattern (SCC), where the subscriber controls cleanup via `onCleanup`:
+This example demonstrates the core idea of the Subscriber Self Control Pattern (Self-Release), where the subscriber controls cleanup via `onCleanup`:
 ```js
 class Notifier {
   constructor() {
@@ -153,10 +153,10 @@ notifier.notify('userLogin', 'User logged in!');
 - **Clear Intent:** `onCleanup` makes cleanup explicit
 - **Flexible:** Listeners choose *when* to unregister (e.g., timeout, condition)
 - **Minimal Boilerplate:** Keeps logic local to listener
-  ## Extending SCC for State Management and Reactivity
-The Subscriber Self Control Pattern (SCC) is well-suited for creating state-driven objects, such as those used in reactive programming or UI frameworks. By extending the `Notifier` class, you can build objects that manage state changes and notify listeners efficiently, while allowing subscribers to control their own cleanup. This reduces memory leaks and simplifies state management in dynamic applications.
+  ## Extending Self-Release for State Management and Reactivity
+The Subscriber Self Control Pattern (Self-Release) is well-suited for creating state-driven objects, such as those used in reactive programming or UI frameworks. By extending the `Notifier` class, you can build objects that manage state changes and notify listeners efficiently, while allowing subscribers to control their own cleanup. This reduces memory leaks and simplifies state management in dynamic applications.
 
-- **State-Driven Objects**: SCC enables listeners to react to state changes (e.g., via a "change" event) and unsubscribe when no longer needed.
+- **State-Driven Objects**: Self-Release enables listeners to react to state changes (e.g., via a "change" event) and unsubscribe when no longer needed.
 - **Reactive Applications**: Perfect for scenarios where state updates trigger UI updates or other side effects.
 - **Clean Resource Management**: Subscribers define their own cleanup logic, ensuring resources are released appropriately.
 
