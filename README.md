@@ -1,4 +1,4 @@
-# Self-Release Event Pattern
+# Self-Release Pattern
 
 in the **Self-Release pattern** , **Publisher** gives cleanup control to the **Subscriber**. Instead of the **Publisher** removing listeners, it provides a `release` function via `listener.onCleanup`. The **Subscriber** decides *when* and *how* to unregister.
 ## Terminology Clarification
