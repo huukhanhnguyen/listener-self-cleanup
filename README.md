@@ -1,21 +1,34 @@
-# Self-Release Pattern
+# Subscriber-Controlled Pattern
 
-in the **Self-Release pattern** , **Publisher** gives cleanup control to the **Subscriber**. Instead of the **Publisher** removing listeners, it provides a `release` function via `listener.onCleanup`. The **Subscriber** decides *when* and *how* to unregister.
-## Terminology Clarification
-To avoid confusion, we define the terms used in this pattern.
-### Subject: Source of events or signals maintains a list of registered listeners
-- **Emitter**
-- **Publisher**
-- **Announcer**
-- **Notifier**
-### Receiver reacts when notified
-- **Subscriber**
-- **Listener**
-- **Observer**
-- **Receiver**
-- **Callback**
-  
-This pattern applies regardless of which terminology your framework uses.
+Allow **subscribers** (listeners or observers) to **manage their own lifecycle**, including when and how to unsubscribe from a publisher, rather than relying on the publisher or external controllers to handle cleanup logic.
+
+## Visual Representation 
+```bash
++--------------------+        notify()         +---------------------+
+|     Publisher      | ----------------------> |     Subscriber      |
+| (Notifier/Subject) |                         | (Listener/Observer) |
++--------------------+                         +---------------------+
+         ^                                                |
+         |                                                |
+         +------------------- release() <-----------------+
+
+```
+## Participants
+
+- **Publisher (Notifier/Subject)**  
+  - Manages a list of subscribers.  
+  - Provides each subscriber with a `release()` function during registration.
+
+- **Subscriber (Listener/Observer)**  
+  - Listens to notifications as usual.  
+  - Stores and invokes `release()` based on internal logic, conditions, or side-effects.
+
+## Collaborations
+
+1. Publisher calls `addListener(listener)`
+2. Publisher generates a `release()` function and passes it to `listener.onCleanup(release)`
+3. Listener stores the `release()` function and invokes it based on its own lifecycle
+4. When `release()` is called, the publisher removes that listener from its internal list
 ## Problems with Traditional Cleanup
 
 ### Manual Unregistration
@@ -36,7 +49,7 @@ This pattern applies regardless of which terminology your framework uses.
 
 ## JavaScript Example
 ### Basic Implementation
-This example demonstrates the core idea of the Subscriber Self Control Pattern (Self-Release), where the subscriber controls cleanup via `onCleanup`:
+This example demonstrates the core idea of the Subscriber Self Control Pattern (Subscriber-Controlled), where the subscriber controls cleanup via `onCleanup`:
 ```js
 class Notifier {
   constructor() {
@@ -153,10 +166,10 @@ notifier.notify('userLogin', 'User logged in!');
 - **Clear Intent:** `onCleanup` makes cleanup explicit
 - **Flexible:** Listeners choose *when* to unregister (e.g., timeout, condition)
 - **Minimal Boilerplate:** Keeps logic local to listener
-  ## Extending Self-Release for State Management and Reactivity
-The Subscriber Self Control Pattern (Self-Release) is well-suited for creating state-driven objects, such as those used in reactive programming or UI frameworks. By extending the `Notifier` class, you can build objects that manage state changes and notify listeners efficiently, while allowing subscribers to control their own cleanup. This reduces memory leaks and simplifies state management in dynamic applications.
+  ## Extending Subscriber-Controlled for State Management and Reactivity
+The Subscriber Self Control Pattern (Subscriber-Controlled) is well-suited for creating state-driven objects, such as those used in reactive programming or UI frameworks. By extending the `Notifier` class, you can build objects that manage state changes and notify listeners efficiently, while allowing subscribers to control their own cleanup. This reduces memory leaks and simplifies state management in dynamic applications.
 
-- **State-Driven Objects**: Self-Release enables listeners to react to state changes (e.g., via a "change" event) and unsubscribe when no longer needed.
+- **State-Driven Objects**: Subscriber-Controlled enables listeners to react to state changes (e.g., via a "change" event) and unsubscribe when no longer needed.
 - **Reactive Applications**: Perfect for scenarios where state updates trigger UI updates or other side effects.
 - **Clean Resource Management**: Subscribers define their own cleanup logic, ensuring resources are released appropriately.
 
