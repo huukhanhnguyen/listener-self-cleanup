@@ -93,7 +93,7 @@ notifier.notify('event fired!');
 ```
 ### Production-Ready Implementation
 For production environments, the Notifier should support multiple event types, include error handling, and provide additional cleanup options. Below is a robust implementation:
-- Official [event-norifier](https://github.com/huukhanhnguyen/event-notifier)
+- Javascript Official [event-notifier](https://github.com/huukhanhnguyen/event-notifier)
 ## Benefits
 - **Programmable Unsubscription**: The `listener.onCleanup` function allows subscribers to define custom unsubscription logic, triggered by registered events (e.g., timeouts, user actions, or specific conditions), ensuring reliable cleanup without manual intervention.
 - **Clear Intent:** `onCleanup` makes cleanup explicit
